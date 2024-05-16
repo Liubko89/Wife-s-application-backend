@@ -16,6 +16,9 @@ const taskSchema = new Schema(
     time: {
       type: String,
     },
+    income: {
+      type: String,
+    },
   },
   { versionKey: false, timestamps: true }
 );
