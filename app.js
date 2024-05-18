@@ -3,6 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import tasksRouter from "./routes/tasksRouter.js";
 import mongoose from "mongoose";
+import clientsRouter from "./routes/clientsRouter.js";
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/tasks", tasksRouter);
+app.use("/clients", clientsRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Route not found" });

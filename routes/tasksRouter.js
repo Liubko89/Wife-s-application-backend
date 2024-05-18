@@ -1,19 +1,19 @@
 import express from "express";
 import {
-  // getAllContacts,
-  // getOneContact,
-  // deleteContact,
+  getAllTasks,
+  getOneTask,
+  deleteTask,
   createTask,
-  // updateContact,
-  // updateStatusContact,
+  updateTask,
+  // updateStatusTask,
 } from "../controllers/tasksControllers.js";
 
 const tasksRouter = express.Router();
-// contactsRouter.get("/", getAllContacts);
-// contactsRouter.get("/:id", getOneContact);
-// contactsRouter.delete("/:id", deleteContact);
+tasksRouter.get("/", getAllTasks);
+tasksRouter.get("/:id", getOneTask);
+tasksRouter.delete("/:id", deleteTask);
 tasksRouter.post("/", createTask);
-// contactsRouter.put("/:id", updateContact);
-// contactsRouter.patch("/:id/favorite", updateStatusContact);
+tasksRouter.put("/:id", updateTask);
+// contactsRouter.patch("/:id/favorite", updateStatusTask);
 
 export default tasksRouter;

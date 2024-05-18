@@ -1,26 +1,26 @@
 import { isValidObjectId } from "mongoose";
 import HttpError from "../helpers/HttpError.js";
-import Task from "../models/task.js";
+import Client from "../models/client.js";
 // import {
 //   createContactSchema,
 //   updateContactSchema,
 //   updateStatusContactSchema,
 // } from "../schemas/contactsSchemas.js";
 
-export const getAllTasks = async (_, res, next) => {
+export const getAllClients = async (_, res, next) => {
   try {
-    const data = await Task.find();
+    const data = await Client.find();
     res.status(200).json(data);
   } catch (error) {
     next(error);
   }
 };
 
-export const getOneTask = async (req, res, next) => {
+export const getOneClient = async (req, res, next) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) throw HttpError(400, `${id} is not valid id`);
-    const data = await Task.findById(id);
+    const data = await Client.findById(id);
     if (!data) throw HttpError(404);
     res.status(200).json(data);
   } catch (error) {
@@ -28,11 +28,11 @@ export const getOneTask = async (req, res, next) => {
   }
 };
 
-export const deleteTask = async (req, res, next) => {
+export const deleteClient = async (req, res, next) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) throw HttpError(400, `${id} is not valid id`);
-    const data = await Task.findByIdAndDelete(id);
+    const data = await Client.findByIdAndDelete(id);
     if (!data) throw HttpError(404);
     res.status(200).json(data);
   } catch (error) {
@@ -40,20 +40,20 @@ export const deleteTask = async (req, res, next) => {
   }
 };
 
-export const createTask = async (req, res, next) => {
+export const createClient = async (req, res, next) => {
   try {
     // const { error } = createContactSchema.validate(req.body);
     // if (error) {
     //   throw HttpError(400, error.message);
     // }
-    const newTask = await Task.create(req.body);
-    res.status(201).json(newTask);
+    const newClient = await Client.create(req.body);
+    res.status(201).json(newClient);
   } catch (error) {
     next(error);
   }
 };
 
-export const updateTask = async (req, res, next) => {
+export const updateClient = async (req, res, next) => {
   try {
     const { id } = req.params;
     if (!isValidObjectId(id)) throw HttpError(400, `${id} is not valid id`);
@@ -66,12 +66,12 @@ export const updateTask = async (req, res, next) => {
     if (!req.body || Object.keys(req.body).length === 0)
       throw HttpError(400, "Body must have at least one field");
 
-    const updatedTask = await Task.findByIdAndUpdate(id, req.body, {
+    const updatedClient = await Client.findByIdAndUpdate(id, req.body, {
       new: true,
     });
 
-    if (!updatedTask) throw HttpError(404);
-    res.status(200).json(updatedTask);
+    if (!updatedClient) throw HttpError(404);
+    res.status(200).json(updatedClient);
   } catch (error) {
     next(error);
   }
